@@ -1,0 +1,68 @@
+﻿ .busqueda{
+     padding-top: 0px; padding-bottom: 0px;
+ }
+ .busquedatexto{
+     font-size: 22px;
+     
+ }
+ .busquedatextovalor{
+     font-size: 12px;
+ }
+
+ .productoencontrado{
+     text-align :right ;
+ }
+ .articulo{
+     border-bottom: 1px solid #D6D8DA
+ }
+ .articuloimagen{
+     margin-left: auto; 
+     margin-right: auto; 
+     width: 80px;
+     height: 80px;
+      
+ }
+ 
+
+  .titulodesc {
+     font-size: 18px;
+      color: blue; 
+      text-decoration: none ;
+ }
+ .titulodesc:hover{
+     
+      text-decoration: none ;
+ }
+
+ .tituloparte{
+     margin-top: 5px; color: #3E4144; font-weight: normal;
+ }
+ .negritas{
+     font-weight:bold;
+ }
+ .piezas{
+     font-size: 10px;
+ }
+.precio{
+    text-align: center; 
+    min-width: 110px; 
+    color: green; 
+    font-size: 18px;
+}
+.textoiva{
+    color: black; font-size: 10px
+}
+.botonagregar{
+    text-align: center;
+}
+.textodisponibilidad{
+    font-size: 10px; 
+    text-align: center;
+    font-weight: bold
+}
+.disponible{
+    color: green;
+}
+.nodisponible{
+    color: red;
+}

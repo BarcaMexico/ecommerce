@@ -1,0 +1,358 @@
+﻿<%@ Master Language="VB" CodeFile="MasterPage.master.vb" Inherits="MasterPagepolo" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
+    <link href="Content/font-awesome.min.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+</head>
+<body>
+    <form id="form1" runat="server">
+
+
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see http://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Framework Scripts--%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="bootstrap" />
+                <asp:ScriptReference Name="respond" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+
+
+        <div>
+            <%--<link href="Content/loginestilo.css" rel="stylesheet" />--%>
+
+            <link href="Content/metisMenu.min.css" rel="stylesheet" />
+            <link href="Content/sb-admin-2.css" rel="stylesheet" />
+            <link href="Content/morris.css" rel="stylesheet" />
+            <link href="Content/contentfix.css" rel="stylesheet" />
+            <%--   <div class="row">
+    <div class="Absolute-Center is-Responsive">
+
+        <div class="text-center">
+            hola mundo  <i class="fa fa-envelope fa-fw"></i> 
+          </div>  
+
+    </div>
+    </div>--%>
+             
+            <style>
+                #noti_Container {
+                    position: relative; /* This is crucial for the absolutely positioned element */
+                    border: 1px solid blue; /* This is just to show you where the container ends */
+                    width: 16px;
+                    height: 16px;
+                }
+
+                .noti_bubble {
+                    position: absolute; /* This breaks the div from the normal HTML document. */
+                    top: 9px;
+                    right: 8px;
+                    padding: 1px 2px 1px 2px;
+                    background-color: red; /* you could use a background image if you'd like as well */
+                    color: white;
+                    font-weight: bold;
+                    font-size: 0.55em;
+                    /* The following is CSS3, but isn't crucial for this technique to work. */
+                    /* Keep in mind that if a browser doesn't support CSS3, it's fine! They just won't have rounded borders and won't have a box shadow effect. */
+                    /* You can always use a background image to produce the same effect if you want to, and you can use both together so browsers without CSS3 still have the rounded/shadow look. */
+                    border-radius: 30px;
+                    box-shadow: 1px 1px 1px gray;
+                }
+            </style>
+
+            <div id="wrapper">
+
+                <!-- Navigation   navbar-default -->
+                <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0; " id="barratop" ClientIDMode="Static">
+
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class=" " href="">
+                               <img style="margin: auto; margin-left: 10px; max-width: 200px; max-height: 50px;" runat="server"  id="logo" ClientIDMode="Static"
+                                src="http://www.siliconweek.com/wp-content/uploads/2012/08/microsoft-nuevo-logo-alta.png" /></a>
+                        </div>
+                    <!-- /.navbar-header -->
+
+                    <ul class="nav navbar-top-links navbar-right">
+
+
+                        <li class="   " runat="server" id="carritolink">
+                            <a href="frmOrdenCarrito.aspx">
+                                <asp:ContentPlaceHolder ID="CP2" runat="server">
+
+                                    <span class="carrito">Carrito de compra</span>  <i class="fa fa-shopping-cart   "></i><span id="carritonoti" runat="server" class="noti_bubble"></span>
+                                </asp:ContentPlaceHolder>
+                            </a>
+                        </li>
+
+
+                        <%-- <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-envelope fa-fw"></i><i class="fa fa-caret-down"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-messages">
+                                <li>
+                                    <a href="#">
+                                        <div>
+                                            <strong>John Smith</strong>
+                                            <span class="pull-right text-muted">
+                                                <em>Yesterday</em>
+                                            </span>
+                                        </div>
+                                        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="#">
+                                        <div>
+                                            <strong>John Smith</strong>
+                                            <span class="pull-right text-muted">
+                                                <em>Yesterday</em>
+                                            </span>
+                                        </div>
+                                        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="#">
+                                        <div>
+                                            <strong>John Smith</strong>
+                                            <span class="pull-right text-muted">
+                                                <em>Yesterday</em>
+                                            </span>
+                                        </div>
+                                        <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a class="text-center" href="#">
+                                        <strong>Read All Messages</strong>
+                                        <i class="fa fa-angle-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                            <!-- /.dropdown-messages -->
+                        </li>--%>
+
+
+                        <!-- /.dropdown -->
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-user fa-fw"></i><i class="fa fa-caret-down"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-messages">
+                                <li runat="server" id="opccambiar"><a href="" runat="server" id="cambiarRazon"><i class="fa fa-user fa-fw"></i>Cambiar Socio de negocio</a>
+                                </li>
+
+                                <li class="divider" runat="server" id="divider"></li>
+                                <li><a href="" runat="server" id="CerrarSesion"><i class="fa fa-sign-out fa-fw"></i>Cerrar Sesion </a>
+                                </li>
+                            </ul>
+                            <!-- /.dropdown-user -->
+                        </li>
+                        <!-- /.dropdown -->
+                    </ul>
+                    <!-- /.navbar-top-links -->
+                    <link href="Content/menucolor.css" rel="stylesheet" />
+                    <div class=" sidebar" role="navigation">
+
+                        <div runat="server" id="menuuser" class="sidebar-nav navbar-collapse">
+                            <ul class="nav" id="side-menu">
+
+                                <li class="infousu">
+                                   
+
+
+
+                                    <div class="row">
+                                        <div class="col-xs-3 " style =" text-align :center ;">
+                                            <a href="frmImagen.aspx">
+                                                <img runat="server" id="divUserImg" class="imguser" src="" /></a>
+                                        </div>
+                                        <div class="col-xs-9  " runat="server" id="divUserName" style =" margin-top :18px; ">
+                                             
+                                        </div>
+                                    </div>
+
+                                </li>
+
+                                <li class="infousu">
+                                    
+
+
+
+                                    <div class="row " style="padding: 0px 22px 15px"> 
+                                        
+                                             <span style="text-align: left ; display: block;"><b>Socio de Negocio</b></span>
+                                    <div runat="server" id="divRazonName" style="text-align: left; display: block;"></div>
+                                    <div runat="server" id="divRazonAdr" style="text-align: left; display: block;"></div>
+                                    <div runat="server" id="divRazonZip" style="text-align: left; display: block;"></div>
+                                    <div runat="server" id="divRazonMON" style="text-align: left; display: block;"></div>
+                                        
+                                    </div>
+
+
+
+
+
+
+
+
+
+                                    
+                                     
+                                </li>
+
+                                <li>
+                                    <a id="inicio" href="frmInicio.aspx"><i class="fa fa-home fa-fw fa-2x"></i>Inicio</a>
+                                </li>
+                                <li>
+                                    <a id="orden" href="frmOrden.aspx"><i class="fa fa-shopping-cart fa-2x fa-fw"></i>Orden de Venta</a>
+                                </li>
+                                <li>
+                                    <a id="emb" href="frmEmbarques.aspx"><i class="fa fa-check-square-o fa-2x fa-fw"></i>Confirmar embarque</a>
+                                </li>
+                                <li>
+                                    <a id="edo" href="frmEdo.aspx"><i class="fa fa-list-ul fa-2x fa-fw"></i>Estado de cuenta</a>
+                                </li>
+                                <li>
+                                    <a id="ped" href="frmPedidos.aspx"><i class="fa fa-truck fa-2x fa-fw"></i>Pedidos abiertos</a>
+                                </li>
+                                <li>
+                                    <a id="fac" href="frmFac.aspx"><i class="fa fa-file-text-o fa-2x fa-fw"></i>Historial de facturación</a>
+                                </li>
+                                <li>
+                                    <a id="pag" href="frmPagos.aspx"><i class="fa fa-usd fa-2x fa-fw"></i>Pagos</a>
+                                </li>
+
+                                <li>
+                                    <a id="msj" href="frmMensajes.aspx"><i class="fa fa-envelope-o fa-2x fa-fw"></i>Mensajes</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <!-- /.sidebar-collapse -->
+
+
+
+
+
+
+
+
+
+
+
+                        <div runat="server" id="menuadmin" class="sidebar-nav navbar-collapse">
+                            <ul class="nav" id="side-menu">
+
+                              
+
+                                  <li class="infousu"> 
+                                    <div class="row">
+                                        <div class="col-xs-3 " style =" text-align :center ;">
+                                            <a href="frmImagen.aspx">
+                                                <img runat="server" id="divUserImg2" class="imguser" src="" /></a>
+                                        </div>
+                                        <div class="col-xs-9  " runat="server" id="divUserName2" style =" margin-top :18px; ">
+                                             
+                                        </div>
+                                    </div>
+
+                                </li>
+
+
+
+                                  <li>
+                                    <a href="frmdiscreadmin.aspx"><i class="fa fa-exclamation-triangle fa-fw"></i>Discrepancias</a>
+                                </li>
+                                <li>
+                                    <a href="frmMensajesAdm.aspx"><i class="fa fa-envelope-o fa-fw"></i>Mensajes</a>
+                                </li>
+                                <li>
+                                    <a href="frmConfig.aspx"><i class="fa fa-cogs fa-fw"></i>Configuracion</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <!-- /.sidebar-collapse -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                    <!-- /.navbar-static-side -->
+                </nav>
+
+
+            </div>
+
+
+
+
+
+            <style runat="server" id="estilo"></style>
+
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+
+
+
+
+            <script src="Scripts/metisMenu.min.js"></script>
+
+
+
+            <script src="Scripts/sb-admin-2.js"></script>
+        </div>
+    </form>
+</body>
+</html>

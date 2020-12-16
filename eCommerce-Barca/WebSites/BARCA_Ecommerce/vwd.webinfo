@@ -1,0 +1,13 @@
+﻿<?xml version="1.0"?>
+<!-- 
+  Visual Studio global web project settings.
+-->
+<VisualWebDeveloper>
+
+  <comReferences>
+    <reference Name="interop.cdo" ID="{CD000000-8B95-11D1-82DB-00C04FB1625D}\1.0\0"/>
+    <reference Name="interop.mmc20" ID="{8E80422B-CAC4-472B-B272-9635F1DFEF3B}\1.0\0"/>
+    <reference Name="interop.sbodi_server" ID="{D68328C8-4EDA-4427-8E76-5CE3ED1063C0}\9.0\0"/>
+    <reference Name="interop.adodb" ID="{B691E011-1797-432E-907A-4D8C69339129}\6.0\0"/>
+  </comReferences>
+</VisualWebDeveloper>

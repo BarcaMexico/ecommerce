@@ -1,0 +1,624 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://soportesap.interlatin.com.mx:81/ILicense/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://soportesap.interlatin.com.mx:81/ILicense/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://soportesap.interlatin.com.mx:81/ILicense/">
+      <s:element name="HWK">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="OSVer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="InstallDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SerialNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CPUId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="HWKResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HWKResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PLI">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddonKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="HardwareKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Database" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserSBO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DBServer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Key" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="fini" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ffin" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Block" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Fixed" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PLIResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PLIResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GDT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddOnKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="HardwareKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Database" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserSBO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DBServer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LicenseKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GDTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GDTResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="STS">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddOnKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="HardwareKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Database" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserSBO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DBServer" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="STSResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="STSResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FXD">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddOnKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="HardwareKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Database" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserSBO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DBServer" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FXDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FXDResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RPT">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Key" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DTQ" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DTT" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RPTResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RPTResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GLI">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddOnKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="HardwareKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Database" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserSBO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DBServer" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GLIResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GLIResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="COMS">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HardwareKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Database" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Version" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CompnyName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="OADM" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CINF" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="COMSResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="HWS">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HardwareKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Domain" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="User" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MachineName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="OS" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="OSVer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Organization" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="OSArchitecture" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="InstallDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SerialNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CPUType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NoCPUs" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CPUId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Memory" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IPA" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IPB" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="HWSResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="SRVR">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HardwareKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DBServer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserSQL" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DBServerType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LicenseServer" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SRVRResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="USRS">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HardwareKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Database" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserSBO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DBServer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserSQL" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="HostName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IPA" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IPB" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="USRSResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ASSG">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddOnKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="HardwareKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Database" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserSBO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DBServer" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ASSGResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ADDN">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddOnKey" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AddOnName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ADDNResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HWKSoapIn">
+    <wsdl:part name="parameters" element="tns:HWK" />
+  </wsdl:message>
+  <wsdl:message name="HWKSoapOut">
+    <wsdl:part name="parameters" element="tns:HWKResponse" />
+  </wsdl:message>
+  <wsdl:message name="PLISoapIn">
+    <wsdl:part name="parameters" element="tns:PLI" />
+  </wsdl:message>
+  <wsdl:message name="PLISoapOut">
+    <wsdl:part name="parameters" element="tns:PLIResponse" />
+  </wsdl:message>
+  <wsdl:message name="GDTSoapIn">
+    <wsdl:part name="parameters" element="tns:GDT" />
+  </wsdl:message>
+  <wsdl:message name="GDTSoapOut">
+    <wsdl:part name="parameters" element="tns:GDTResponse" />
+  </wsdl:message>
+  <wsdl:message name="STSSoapIn">
+    <wsdl:part name="parameters" element="tns:STS" />
+  </wsdl:message>
+  <wsdl:message name="STSSoapOut">
+    <wsdl:part name="parameters" element="tns:STSResponse" />
+  </wsdl:message>
+  <wsdl:message name="FXDSoapIn">
+    <wsdl:part name="parameters" element="tns:FXD" />
+  </wsdl:message>
+  <wsdl:message name="FXDSoapOut">
+    <wsdl:part name="parameters" element="tns:FXDResponse" />
+  </wsdl:message>
+  <wsdl:message name="RPTSoapIn">
+    <wsdl:part name="parameters" element="tns:RPT" />
+  </wsdl:message>
+  <wsdl:message name="RPTSoapOut">
+    <wsdl:part name="parameters" element="tns:RPTResponse" />
+  </wsdl:message>
+  <wsdl:message name="GLISoapIn">
+    <wsdl:part name="parameters" element="tns:GLI" />
+  </wsdl:message>
+  <wsdl:message name="GLISoapOut">
+    <wsdl:part name="parameters" element="tns:GLIResponse" />
+  </wsdl:message>
+  <wsdl:message name="COMSSoapIn">
+    <wsdl:part name="parameters" element="tns:COMS" />
+  </wsdl:message>
+  <wsdl:message name="COMSSoapOut">
+    <wsdl:part name="parameters" element="tns:COMSResponse" />
+  </wsdl:message>
+  <wsdl:message name="HWSSoapIn">
+    <wsdl:part name="parameters" element="tns:HWS" />
+  </wsdl:message>
+  <wsdl:message name="HWSSoapOut">
+    <wsdl:part name="parameters" element="tns:HWSResponse" />
+  </wsdl:message>
+  <wsdl:message name="SRVRSoapIn">
+    <wsdl:part name="parameters" element="tns:SRVR" />
+  </wsdl:message>
+  <wsdl:message name="SRVRSoapOut">
+    <wsdl:part name="parameters" element="tns:SRVRResponse" />
+  </wsdl:message>
+  <wsdl:message name="USRSSoapIn">
+    <wsdl:part name="parameters" element="tns:USRS" />
+  </wsdl:message>
+  <wsdl:message name="USRSSoapOut">
+    <wsdl:part name="parameters" element="tns:USRSResponse" />
+  </wsdl:message>
+  <wsdl:message name="ASSGSoapIn">
+    <wsdl:part name="parameters" element="tns:ASSG" />
+  </wsdl:message>
+  <wsdl:message name="ASSGSoapOut">
+    <wsdl:part name="parameters" element="tns:ASSGResponse" />
+  </wsdl:message>
+  <wsdl:message name="ADDNSoapIn">
+    <wsdl:part name="parameters" element="tns:ADDN" />
+  </wsdl:message>
+  <wsdl:message name="ADDNSoapOut">
+    <wsdl:part name="parameters" element="tns:ADDNResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ServiceSoap">
+    <wsdl:operation name="HWK">
+      <wsdl:input message="tns:HWKSoapIn" />
+      <wsdl:output message="tns:HWKSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PLI">
+      <wsdl:input message="tns:PLISoapIn" />
+      <wsdl:output message="tns:PLISoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GDT">
+      <wsdl:input message="tns:GDTSoapIn" />
+      <wsdl:output message="tns:GDTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="STS">
+      <wsdl:input message="tns:STSSoapIn" />
+      <wsdl:output message="tns:STSSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FXD">
+      <wsdl:input message="tns:FXDSoapIn" />
+      <wsdl:output message="tns:FXDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RPT">
+      <wsdl:input message="tns:RPTSoapIn" />
+      <wsdl:output message="tns:RPTSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GLI">
+      <wsdl:input message="tns:GLISoapIn" />
+      <wsdl:output message="tns:GLISoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="COMS">
+      <wsdl:input message="tns:COMSSoapIn" />
+      <wsdl:output message="tns:COMSSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="HWS">
+      <wsdl:input message="tns:HWSSoapIn" />
+      <wsdl:output message="tns:HWSSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SRVR">
+      <wsdl:input message="tns:SRVRSoapIn" />
+      <wsdl:output message="tns:SRVRSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="USRS">
+      <wsdl:input message="tns:USRSSoapIn" />
+      <wsdl:output message="tns:USRSSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ASSG">
+      <wsdl:input message="tns:ASSGSoapIn" />
+      <wsdl:output message="tns:ASSGSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ADDN">
+      <wsdl:input message="tns:ADDNSoapIn" />
+      <wsdl:output message="tns:ADDNSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServiceSoap" type="tns:ServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HWK">
+      <soap:operation soapAction="http://soportesap.interlatin.com.mx:81/ILicense/HWK" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PLI">
+      <soap:operation soapAction="http://soportesap.interlatin.com.mx:81/ILicense/PLI" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GDT">
+      <soap:operation soapAction="http://soportesap.interlatin.com.mx:81/ILicense/GDT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="STS">
+      <soap:operation soapAction="http://soportesap.interlatin.com.mx:81/ILicense/STS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FXD">
+      <soap:operation soapAction="http://soportesap.interlatin.com.mx:81/ILicense/FXD" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RPT">
+      <soap:operation soapAction="http://soportesap.interlatin.com.mx:81/ILicense/RPT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GLI">
+      <soap:operation soapAction="http://soportesap.interlatin.com.mx:81/ILicense/GLI" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="COMS">
+      <soap:operation soapAction="http://soportesap.interlatin.com.mx:81/ILicense/COMS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HWS">
+      <soap:operation soapAction="http://soportesap.interlatin.com.mx:81/ILicense/HWS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SRVR">
+      <soap:operation soapAction="http://soportesap.interlatin.com.mx:81/ILicense/SRVR" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="USRS">
+      <soap:operation soapAction="http://soportesap.interlatin.com.mx:81/ILicense/USRS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ASSG">
+      <soap:operation soapAction="http://soportesap.interlatin.com.mx:81/ILicense/ASSG" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ADDN">
+      <soap:operation soapAction="http://soportesap.interlatin.com.mx:81/ILicense/ADDN" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ServiceSoap12" type="tns:ServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HWK">
+      <soap12:operation soapAction="http://soportesap.interlatin.com.mx:81/ILicense/HWK" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PLI">
+      <soap12:operation soapAction="http://soportesap.interlatin.com.mx:81/ILicense/PLI" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GDT">
+      <soap12:operation soapAction="http://soportesap.interlatin.com.mx:81/ILicense/GDT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="STS">
+      <soap12:operation soapAction="http://soportesap.interlatin.com.mx:81/ILicense/STS" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FXD">
+      <soap12:operation soapAction="http://soportesap.interlatin.com.mx:81/ILicense/FXD" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RPT">
+      <soap12:operation soapAction="http://soportesap.interlatin.com.mx:81/ILicense/RPT" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GLI">
+      <soap12:operation soapAction="http://soportesap.interlatin.com.mx:81/ILicense/GLI" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="COMS">
+      <soap12:operation soapAction="http://soportesap.interlatin.com.mx:81/ILicense/COMS" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HWS">
+      <soap12:operation soapAction="http://soportesap.interlatin.com.mx:81/ILicense/HWS" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SRVR">
+      <soap12:operation soapAction="http://soportesap.interlatin.com.mx:81/ILicense/SRVR" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="USRS">
+      <soap12:operation soapAction="http://soportesap.interlatin.com.mx:81/ILicense/USRS" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ASSG">
+      <soap12:operation soapAction="http://soportesap.interlatin.com.mx:81/ILicense/ASSG" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ADDN">
+      <soap12:operation soapAction="http://soportesap.interlatin.com.mx:81/ILicense/ADDN" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service">
+    <wsdl:port name="ServiceSoap" binding="tns:ServiceSoap">
+      <soap:address location="http://192.168.52.11/ILicense/ILicenser.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ServiceSoap12" binding="tns:ServiceSoap12">
+      <soap12:address location="http://192.168.52.11/ILicense/ILicenser.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
