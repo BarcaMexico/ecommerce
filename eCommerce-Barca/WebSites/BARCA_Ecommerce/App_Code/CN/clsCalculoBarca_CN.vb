@@ -405,7 +405,7 @@ Namespace CN
                     slpName = ReadXML(Respuesta.InnerXml, "slpName").ToUpper
 
                     If memo.Contains("DIRECTO") Then
-                        squery = "select U_COMISION from [@com_ag_directos] where cast(code as decimal(18,2)) &lt;= " & descuento & " and cast(name as decimal(18,2)) &gt;= " & descuento & " "
+                        squery = "select U_COMISION from [@com_ag_directos] where cast(code as decimal(18,2)) &lt;= " & Math.Round(dbCtopSC, 2) & " and cast(name as decimal(18,2)) &gt;= " & Math.Round(dbCtopSC, 2) & " "
                         Respuesta = ws.ExecuteSQL(Session("Token"), squery)
                         strTmp = ReadXML(Respuesta.InnerXml, "U_COMISION")
                         If strTmp = "" Then
@@ -416,45 +416,67 @@ Namespace CN
                             End If
                         End If
                     Else
-                        'HRS 10-04-2018 
-                        'Cambio de tabla [@com_comisionista] a tabla [@com_comisionista_P]
-                        'HRS 23-04-2018
-                        'Cambio "descuento" por "dbCtopSC"
-                        squery = "select U_COMISION from [@com_comisionista_P] with(nolock) where cast(code as decimal(18,2)) &lt;= " & Math.Round(dbCtopSC, 2) & " and cast(name as decimal(18,2)) &gt;= " & Math.Round(dbCtopSC, 2) & " "
-                        Respuesta = ws.ExecuteSQL(Session("Token"), squery)
-                        strTmp = ReadXML(Respuesta.InnerXml, "U_COMISION")
-                        If strTmp = "" Then
-                            porComision = 0
+                        If memo.Contains("COMISIONISTA ESPECIAL") Then
+                            squery = "select U_Comision from [@vendespcom] where U_Slpcode = '" & Session("usuCode") & "'  and U_Cardcode = '" & Session("RazCode") & "' "
+                            Respuesta = ws.ExecuteSQL(Session("Token"), squery)
+                            strTmp = ReadXML(Respuesta.InnerXml, "U_Comision")
+                            If strTmp = "" Then
+                                squery = "select U_Comision from [@vendespcom] where U_Slpcode = '" & Session("usuCode") & "' "
+                                Respuesta = ws.ExecuteSQL(Session("Token"), squery)
+                                strTmp = ReadXML(Respuesta.InnerXml, "U_Comision")
+                                If strTmp = "" Then
+                                    porComision = 0
+                                Else
+                                    If IsNumeric(strTmp) Then
+                                        porComision = ReadXML(Respuesta.InnerXml, "U_Comision")
+                                    End If
+                                End If
+                            Else
+                                If IsNumeric(strTmp) Then
+                                    porComision = ReadXML(Respuesta.InnerXml, "U_Comision")
+                                End If
+                            End If
                         Else
-                            If IsNumeric(strTmp) Then
-                                porComision = ReadXML(Respuesta.InnerXml, "U_COMISION")
+                            'HRS 10-04-2018 
+                            'Cambio de tabla [@com_comisionista] a tabla [@com_comisionista_P]
+                            'HRS 23-04-2018
+                            'Cambio "descuento" por "dbCtopSC"
+                            squery = "select U_COMISION from [@com_comisionista_P] with(nolock) where cast(code as decimal(18,2)) &lt;= " & Math.Round(dbCtopSC, 2) & " and cast(name as decimal(18,2)) &gt;= " & Math.Round(dbCtopSC, 2) & " "
+                            Respuesta = ws.ExecuteSQL(Session("Token"), squery)
+                            strTmp = ReadXML(Respuesta.InnerXml, "U_COMISION")
+                            If strTmp = "" Then
+                                porComision = 0
+                            Else
+                                If IsNumeric(strTmp) Then
+                                    porComision = ReadXML(Respuesta.InnerXml, "U_COMISION")
+                                End If
                             End If
                         End If
                     End If
 
                     'valida comisión mínima
-                    strTmp = ""
-                    squery = "select isnull(U_PORCOM,0) as 'U_PORCOM' from OCRD where CardCode = '" & Session("RazCode") & "'"
-                    Respuesta = ws.ExecuteSQL(Session("Token"), squery)
-                    strTmp = ReadXML(Respuesta.InnerXml, "U_PORCOM")
+                    'strTmp = ""
+                    'squery = "select isnull(U_PORCOM,0) as 'U_PORCOM' from OCRD where CardCode = '" & Session("RazCode") & "'"
+                    'Respuesta = ws.ExecuteSQL(Session("Token"), squery)
+                    'strTmp = ReadXML(Respuesta.InnerXml, "U_PORCOM")
 
-                    If porComision < CDbl(strTmp) And CDbl(strTmp) <> 0 Then
-                        porComision = CDbl(strTmp)
-                    End If
+                    'If porComision < CDbl(strTmp) And CDbl(strTmp) <> 0 Then
+                    'porComision = CDbl(strTmp)
+                    'End If
 
-                    oDatosCab_Calculados.dbU_PORCOMISION = porComision
+                    'oDatosCab_Calculados.dbU_PORCOMISION = porComision
 
-                    strTmp = ""
-                    squery = "select Code,isnull(U_ExpTipo,'0') as 'U_ExpTipo',U_CodigoCliente,U_ComiMin from [@BXP_XCPCNS] where Name = '" & Session("usuCode") & "' "
-                    Respuesta = ws.ExecuteSQL(Session("Token"), squery)
-                    strTmp = ReadXML(Respuesta.InnerXml, "Code")
-                    If strTmp <> "" Then
-                        strTmp = ReadXML(Respuesta.InnerXml, "U_ExpTipo")
-                        If strTmp = "1" Then 'Comision 0
-                            porComision = 0
-                            oDatosCab_Calculados.dbU_PORCOMISION = porComision
-                        Else 'Comision Especial
-                            squery = "SELECT U_DESCR, U_DESCG, U_DESCD FROM [@BXP_RSTNC]  " & _
+                    'strTmp = ""
+                    'squery = "select Code,isnull(U_ExpTipo,'0') as 'U_ExpTipo',U_CodigoCliente,U_ComiMin from [@BXP_XCPCNS] where Name = '" & Session("usuCode") & "' "
+                    'Respuesta = ws.ExecuteSQL(Session("Token"), squery)
+                    'strTmp = ReadXML(Respuesta.InnerXml, "Code")
+                    'If strTmp <> "" Then
+                    'strTmp = ReadXML(Respuesta.InnerXml, "U_ExpTipo")
+                    'If strTmp = "1" Then 'Comision 0
+                    'porComision = 0
+                    'oDatosCab_Calculados.dbU_PORCOMISION = porComision
+                    'Else 'Comision Especial
+                    squery = "SELECT U_DESCR, U_DESCG, U_DESCD FROM [@BXP_RSTNC]  " & _
                                     "where Code = '" & Trim(oArticuloUno.strU_CREST) & "' "
                             Respuesta2 = ws.ExecuteSQL(Session("Token"), squery)
                             strTmp = ReadXML(Respuesta2.InnerXml, "U_DESCD")
@@ -463,43 +485,43 @@ Namespace CN
                             End If
                             precioDescuento = Math.Round(precioNetoTotal - (precioNetoTotal * descDir / 100), 2)
 
-                            squery = "select U_COMISION from [@com_especiales] where Name= '" & iTem & "'"
-                            Respuesta2 = ws.ExecuteSQL(Session("Token"), squery) ' modificacion carlos
-                            strTmp = ReadXML(Respuesta2.InnerXml, "U_COMISION")
+                    'squery = "select U_COMISION from [@com_especiales] where Name= '" & iTem & "'"
+                    'Respuesta2 = ws.ExecuteSQL(Session("Token"), squery) ' modificacion carlos
+                    'strTmp = ReadXML(Respuesta2.InnerXml, "U_COMISION")
 
-                            If Math.Round((precioVenta - nPrecioEsp) - precioDescuento, 2) < 0 Or strTmp <> "" Then
-                                squery = "select U_COMISION from [@com_especiales] where Name= '" & iTem & "'"
-                                Respuesta2 = ws.ExecuteSQL(Session("Token"), squery)
-                                strTmp = ReadXML(Respuesta2.InnerXml, "U_COMISION")
+                    'If Math.Round((precioVenta - nPrecioEsp) - precioDescuento, 2) < 0 Or strTmp <> "" Then
+                    '    squery = "select U_COMISION from [@com_especiales] where Name= '" & iTem & "'"
+                    '    Respuesta2 = ws.ExecuteSQL(Session("Token"), squery)
+                    '    strTmp = ReadXML(Respuesta2.InnerXml, "U_COMISION")
 
-                                If strTmp <> "" Then
-                                    porComision = CDbl(strTmp)
-                                Else
-                                    porComision = 0 'No encontro el articulo en COMISIONES ESPECIALES
-                                End If
+                    '    If strTmp <> "" Then
+                    '        porComision = CDbl(strTmp)
+                    '    Else
+                    '        porComision = 0 'No encontro el articulo en COMISIONES ESPECIALES
+                    '    End If
 
-                                strTmp = ReadXML(Respuesta.InnerXml, "U_ComiMin")
-                                If strTmp <> "" And strTmp.ToString <> "0" Then
-                                    porComision = CDbl(strTmp)
-                                End If
-                                comisionPorMillar = Math.Round((porComision * precioVenta) / 100, 2)
-                            Else
-                                comisionPorMillar = Math.Round((precioVenta - nPrecioEsp) - precioDescuento, 2)
-                                porComision = Math.Round((comisionPorMillar / precioVenta) * 100, 2)
-                            End If
+                    '    strTmp = ReadXML(Respuesta.InnerXml, "U_ComiMin")
+                    '    If strTmp <> "" And strTmp.ToString <> "0" Then
+                    '        porComision = CDbl(strTmp)
+                    '    End If
+                    comisionPorMillar = Math.Round((porComision * precioVenta) / 100, 2)
+                    '        Else
+                    '            comisionPorMillar = Math.Round((precioVenta - nPrecioEsp) - precioDescuento, 2)
+                    '            porComision = Math.Round((comisionPorMillar / precioVenta) * 100, 2)
+                    '        End If
 
-                            oDatosCab_Calculados.dbU_PORCOMISION = porComision
+                    '        oDatosCab_Calculados.dbU_PORCOMISION = porComision
 
-                            strTmp = ReadXML(Respuesta.InnerXml, "U_CodigoCliente")
-                            If ClienteDocumento = strTmp Then
-                                oDatosCab_Calculados.dbU_PORCOMISION = 0
-                                comisionPorMillar = 0
-                            End If
+                    '        strTmp = ReadXML(Respuesta.InnerXml, "U_CodigoCliente")
+                    '        If ClienteDocumento = strTmp Then
+                    '            oDatosCab_Calculados.dbU_PORCOMISION = 0
+                    '            comisionPorMillar = 0
+                    '        End If
 
-                        End If
-                    Else
-                        comisionPorMillar = Math.Round((precioVenta * porComision) / 100, 2)
-                    End If
+                    '    End If
+                    'Else
+                    '    comisionPorMillar = Math.Round((precioVenta * porComision) / 100, 2)
+                    'End If
 
                     oDatosCab_Calculados.dbU_COMXMILLAR = comisionPorMillar
                     comision = (comisionPorMillar * (cantSAPTotal / 1000))
@@ -709,6 +731,7 @@ Namespace CN
             Dim squery As String = ""
             Dim nImporte As Double = 0
             Dim nPrecio As Double = 0
+            Dim pjuego As Integer = 0
 
             'HRS 07-Julio-2017
             Dim lstPreciosEspeciales As New List(Of CE.clsPreciosEspeciales_CE)
@@ -740,10 +763,10 @@ Namespace CN
                             strPropiedad = strTmp
 
                             'Traemos valor de la propiedad del articulo
-                            squery = "SELECT QryGroup" & CInt(strTmp).ToString & " as 'Propiedad' FROM OITM WHERE ItemCode = '" & sItem & "' "
+                            squery = "SELECT QryGroup" & CInt(strTmp).ToString & " as 'Propiedad', CAST(ISNULL(U_PJUEGO,0) AS int) as Pjuego FROM OITM WHERE ItemCode = '" & sItem & "' "
                             Respuesta2 = ws.ExecuteSQL(Session("Token"), squery)
                             strTmp = ReadXML(Respuesta2.InnerXml, "Propiedad")
-
+                            pjuego = ReadXML(Respuesta2.InnerXml, "Pjuego")
                             'If oItem.Properties(oRecordSet.Fields.Item("U_PROPIEDAD").Value) = BoYesNoEnum.tYES Then
                             If strTmp = "Y" Then
                                 '"U_AJUSTE"
@@ -797,11 +820,11 @@ Namespace CN
                                         End If
                                     Case 5 ' tarimas
                                         If nPiezas > 0 Then
-                                            nPrecioEsp += nImporte * Math.Round((1000 / nPiezas), 0)
+                                            nPrecioEsp += nImporte * Math.Round((1000 / nPiezas), 3)
 
                                             'HRS 07-Julio-2017
                                             AgregarListaPreciosEsp(strPropiedad,
-                                                                   nImporte * Math.Round((1000 / nPiezas), 0),
+                                                                   nImporte * Math.Round((1000 / nPiezas), 3),
                                                                    lstPreciosEspeciales)
                                         End If
                                     Case 6 ' tarimas especiales
@@ -819,17 +842,17 @@ Namespace CN
                                             If nPiezas > 0 Then
                                                 nPrecioEsp += Math.Round(calculo, 3)
 
-                                                'HRS 07-Julio-2017
+                                                'HRS 07-Julio-201
                                                 AgregarListaPreciosEsp(strPropiedad,
                                                                        Math.Round(calculo, 3),
                                                                        lstPreciosEspeciales)
                                             End If
                                         End If
                                     Case 7 ' DESVARBE
-                                        nPrecioEsp += nImporte
+                                        nPrecioEsp += nImporte * pjuego
                                         'HRS 07-Julio-2017
                                         AgregarListaPreciosEsp(strPropiedad,
-                                                               nImporte,
+                                                               nImporte * pjuego,
                                                                lstPreciosEspeciales)
 
                                 End Select
@@ -850,6 +873,9 @@ Namespace CN
                         If m_node.ChildNodes.Item(0).InnerText.ToString <> "" Then
 
                             nPrecioEsp += CDbl(m_node.ChildNodes.Item(1).InnerText.ToString)
+                            AgregarListaPreciosEsp("OC",
+                                                   CDbl(m_node.ChildNodes.Item(1).InnerText.ToString),
+                                                   lstPreciosEspeciales)
                         End If
                     Next
                 End If
@@ -864,6 +890,9 @@ Namespace CN
                         'Si encontro datos
                         If m_node.ChildNodes.Item(0).InnerText.ToString <> "" Then
                             nPrecioEsp += CDbl(m_node.ChildNodes.Item(1).InnerText.ToString)
+                            AgregarListaPreciosEsp("NA",
+                                                   CDbl(m_node.ChildNodes.Item(1).InnerText.ToString),
+                                                   lstPreciosEspeciales)
                         End If
                     Next
                 End If

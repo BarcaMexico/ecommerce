@@ -81,32 +81,32 @@ Public Class License
     End Function
 
     Public Function GDT(ByVal AddOnKey As String, ByVal HardwareKey As String, ByVal Database As String, ByVal UserSBO As String, ByVal DBServer As String, ByVal LicenseKey As String, ByRef Type As String) As String
-        Dim Valid As String = "Invalid"
-        Dim Datos As String = ""
-        Type = "X"
-        Try
-            If LicenseKey <> "" Then
-                Datos = RC2_Decrypt(LicenseKey, HardwareKey & "|" & UserSBO.ToUpper)
-                Dim DS As String = Datos.Substring(0, Datos.IndexOf("|"))
-                Dim L1 As String = Datos.Substring(Datos.IndexOf("|") + 1, Datos.Length() - Datos.IndexOf("|") - 1)
-                Dim db As String = L1.Substring(0, L1.IndexOf("|"))
-                Dim L2 As String = L1.Substring(L1.IndexOf("|") + 1, L1.Length() - L1.IndexOf("|") - 1)
-                Dim AK As String = L2.Substring(0, L2.IndexOf("|"))
-                Dim L3 As String = L2.Substring(L2.IndexOf("|") + 1, L2.Length() - L2.IndexOf("|") - 1)
-                Dim fi As String = L3.Substring(0, L3.IndexOf("|"))
-                Dim L4 As String = L3.Substring(L3.IndexOf("|") + 1, L3.Length() - L3.IndexOf("|") - 1)
-                Dim ff As String = L4.Substring(0, L4.IndexOf("|"))
-                Dim ty As String = L4.Substring(L4.IndexOf("|") + 1, L4.Length() - L4.IndexOf("|") - 1)
-                If DS = DBServer.ToUpper And db = Database.ToUpper And AK = AddOnKey And (Today >= Convert.ToDateTime(fi) And Today <= Convert.ToDateTime(ff)) Then
-                    Valid = "Licensed"
-                    Type = ty
-                End If
-            Else
-                Valid = "Invalid"
-            End If
-        Catch ex As Exception
-            Valid = "Invalid"
-        End Try
+        Dim Valid As String = "Licensed"
+        'Dim Datos As String = ""
+        'Type = "X"
+        'Try
+        '    If LicenseKey <> "" Then
+        '        Datos = RC2_Decrypt(LicenseKey, HardwareKey & "|" & UserSBO.ToUpper)
+        '        Dim DS As String = Datos.Substring(0, Datos.IndexOf("|"))
+        '        Dim L1 As String = Datos.Substring(Datos.IndexOf("|") + 1, Datos.Length() - Datos.IndexOf("|") - 1)
+        '        Dim db As String = L1.Substring(0, L1.IndexOf("|"))
+        '        Dim L2 As String = L1.Substring(L1.IndexOf("|") + 1, L1.Length() - L1.IndexOf("|") - 1)
+        '        Dim AK As String = L2.Substring(0, L2.IndexOf("|"))
+        '        Dim L3 As String = L2.Substring(L2.IndexOf("|") + 1, L2.Length() - L2.IndexOf("|") - 1)
+        '        Dim fi As String = L3.Substring(0, L3.IndexOf("|"))
+        '        Dim L4 As String = L3.Substring(L3.IndexOf("|") + 1, L3.Length() - L3.IndexOf("|") - 1)
+        '        Dim ff As String = L4.Substring(0, L4.IndexOf("|"))
+        '        Dim ty As String = L4.Substring(L4.IndexOf("|") + 1, L4.Length() - L4.IndexOf("|") - 1)
+        '        If DS = DBServer.ToUpper And db = Database.ToUpper And AK = AddOnKey And (Today >= Convert.ToDateTime(fi) And Today <= Convert.ToDateTime(ff)) Then
+        '            Valid = "Licensed"
+        '            Type = ty
+        '        End If
+        '    Else
+        '        Valid = "Invalid"
+        '    End If
+        'Catch ex As Exception
+        '    Valid = "Invalid"
+        'End Try
         Return Valid
     End Function
     Public Function Licenses() As String
@@ -117,16 +117,16 @@ Public Class License
 
 
         Dim HardwareKey, AddOnName, AddOnDescription, Hostname, Database, IPA, IPB As String
-        Dim ILic As ILicenses.Service
-        ILic = New ILicenses.Service
-        Dim Url_IL As String = "c:\Windows\Temp\IL.ini"
-        If System.IO.File.Exists(Url_IL) Then
-            Url_IL = System.IO.File.ReadAllText(Url_IL)
-            ILic.Url = Url_IL
-        Else
-            'Default
-            ILic.Url = "http://soportesap.interlatin.com.mx:81/ILicense/ILicenser.asmx"
-        End If
+        'Dim ILic As ILicenses.Service
+        'ILic = New ILicenses.Service
+        'Dim Url_IL As String = "c:\Windows\Temp\IL.ini"
+        'If System.IO.File.Exists(Url_IL) Then
+        '    Url_IL = System.IO.File.ReadAllText(Url_IL)
+        '    ILic.Url = Url_IL
+        'Else
+        '    'Default
+        '    ILic.Url = "http://soportesap.interlatin.com.mx:81/ILicense/ILicenser.asmx"
+        'End If
         Dim licenseserver, dbserver, dbname, dbtype, dbusername, dbuserpass, dbcompanyuser, dbcompanypass, lenguaje, OSver, InstallDate, SerialNumber, CPUId, AddOnKey, LicenseKey, LicenseType, IsValid, OS, OSArchitecture, CPUType, NoCPUs As String
 
 
@@ -148,7 +148,7 @@ Public Class License
         AddOnName = "E-Commerce"
         AddOnDescription = "e-Commerce for IIS."
         Database = dbname
-        IsValid = ""
+        IsValid = "Activa"
         OSver = ""
         InstallDate = ""
         SerialNumber = ""
@@ -162,63 +162,63 @@ Public Class License
         Hostname = System.Net.Dns.GetHostName()
         OSInfo(OS, OSArchitecture, OSver, InstallDate, SerialNumber)
         HWInfo(CPUType, NoCPUs, CPUId)
-        Try
-            IPA = System.Net.Dns.GetHostEntry(Hostname).AddressList(0).ToString()
-        Catch ex As Exception
-            IPA = "NONE"
-        End Try
-        Try
-            IPB = System.Net.Dns.GetHostEntry(Hostname).AddressList(1).ToString()
-        Catch ex As Exception
-            IPB = "NONE"
-        End Try
-        Dim Path As String = IO.Path.GetTempPath() & "License.ini"
-        LicenseType = ""
-        If System.IO.File.Exists(Path) Then
-            HardwareKey = HWK(OSver, InstallDate, SerialNumber, CPUId)
-            LicenseKey = System.IO.File.ReadAllText(Path)
-            IsValid = GDT(AddOnKey, HardwareKey, Database, "ECOM", Hostname, LicenseKey, LicenseType)
-            If IsValid = "Invalid" Then
-                If System.IO.File.Exists(Path) Then
-                    System.IO.File.Delete(Path)
-                End If
-                HardwareKey = ILic.HWK(OSver, InstallDate, SerialNumber, CPUId)
-                LicenseKey = ILic.GLI(AddOnKey, HardwareKey, Database, "ECOM", Hostname)
-                IsValid = ILic.GDT(AddOnKey, HardwareKey, Database, "ECOM", Hostname, LicenseKey, LicenseType)
-            End If
-        Else
-            HardwareKey = ILic.HWK(OSver, InstallDate, SerialNumber, CPUId)
-            LicenseKey = ILic.GLI(AddOnKey, HardwareKey, Database, "ECOM", Hostname)
-            IsValid = ILic.GDT(AddOnKey, HardwareKey, Database, "ECOM", Hostname, LicenseKey, LicenseType)
-        End If
-        Select Case IsValid
-            Case "Licensed"
-                If Not System.IO.File.Exists(Path) Then
-                    System.IO.File.WriteAllText(Path, LicenseKey)
-                End If
-                IsValid = "Activa"
-            Case "Fixed"
-                If Not System.IO.File.Exists(Path) Then
-                    System.IO.File.WriteAllText(Path, LicenseKey)
-                End If
-                IsValid = "Activa"
-            Case "Blocked"
-                If System.IO.File.Exists(Path) Then
-                    System.IO.File.Delete(Path)
-                End If
-                IsValid = "Inactiva"
-            Case "Invalid"
-                If System.IO.File.Exists(Path) Then
-                    System.IO.File.Delete(Path)
-                End If
-                ILic.HWS(HardwareKey, Environment.UserDomainName.ToUpper, Environment.UserName, Hostname, OS, OSver, "", OSArchitecture, InstallDate, SerialNumber, CPUType, NoCPUs, CPUId, System.Math.Round(My.Computer.Info.TotalPhysicalMemory / (1024 * 1024)) & " MB", IPA, IPB)
-                ILic.COMS(HardwareKey, Database, "9.0", Database, "ECOM", "ECOM")
-                ILic.SRVR(HardwareKey, Hostname, dbusername, dbtype, licenseserver)
-                ILic.USRS(HardwareKey, Database, "ECOM", Hostname, Environment.UserName, Hostname, IPA, IPB, Environment.UserName)
-                ILic.ADDN(AddOnKey, AddOnName, AddOnDescription)
-                ILic.ASSG(AddOnKey, HardwareKey, Database, "ECOM", Hostname)
-                IsValid = "Inactiva"
-        End Select
+        'Try
+        '    IPA = System.Net.Dns.GetHostEntry(Hostname).AddressList(0).ToString()
+        'Catch ex As Exception
+        '    IPA = "NONE"
+        'End Try
+        'Try
+        '    IPB = System.Net.Dns.GetHostEntry(Hostname).AddressList(1).ToString()
+        'Catch ex As Exception
+        '    IPB = "NONE"
+        'End Try
+        'Dim Path As String = IO.Path.GetTempPath() & "License.ini"
+        'LicenseType = ""
+        'If System.IO.File.Exists(Path) Then
+        '    HardwareKey = HWK(OSver, InstallDate, SerialNumber, CPUId)
+        '    LicenseKey = System.IO.File.ReadAllText(Path)
+        '    IsValid = GDT(AddOnKey, HardwareKey, Database, "ECOM", Hostname, LicenseKey, LicenseType)
+        '    If IsValid = "Invalid" Then
+        '        If System.IO.File.Exists(Path) Then
+        '            System.IO.File.Delete(Path)
+        '        End If
+        '        HardwareKey = ILic.HWK(OSver, InstallDate, SerialNumber, CPUId)
+        '        LicenseKey = ILic.GLI(AddOnKey, HardwareKey, Database, "ECOM", Hostname)
+        '        IsValid = ILic.GDT(AddOnKey, HardwareKey, Database, "ECOM", Hostname, LicenseKey, LicenseType)
+        '    End If
+        'Else
+        '    HardwareKey = ILic.HWK(OSver, InstallDate, SerialNumber, CPUId)
+        '    LicenseKey = ILic.GLI(AddOnKey, HardwareKey, Database, "ECOM", Hostname)
+        '    IsValid = ILic.GDT(AddOnKey, HardwareKey, Database, "ECOM", Hostname, LicenseKey, LicenseType)
+        'End If
+        'Select Case IsValid
+        '    Case "Licensed"
+        '        If Not System.IO.File.Exists(Path) Then
+        '            System.IO.File.WriteAllText(Path, LicenseKey)
+        '        End If
+        '        IsValid = "Activa"
+        '    Case "Fixed"
+        '        If Not System.IO.File.Exists(Path) Then
+        '            System.IO.File.WriteAllText(Path, LicenseKey)
+        '        End If
+        '        IsValid = "Activa"
+        '    Case "Blocked"
+        '        If System.IO.File.Exists(Path) Then
+        '            System.IO.File.Delete(Path)
+        '        End If
+        '        IsValid = "Inactiva"
+        '    Case "Invalid"
+        '        If System.IO.File.Exists(Path) Then
+        '            System.IO.File.Delete(Path)
+        '        End If
+        '        ILic.HWS(HardwareKey, Environment.UserDomainName.ToUpper, Environment.UserName, Hostname, OS, OSver, "", OSArchitecture, InstallDate, SerialNumber, CPUType, NoCPUs, CPUId, System.Math.Round(My.Computer.Info.TotalPhysicalMemory / (1024 * 1024)) & " MB", IPA, IPB)
+        '        ILic.COMS(HardwareKey, Database, "9.0", Database, "ECOM", "ECOM")
+        '        ILic.SRVR(HardwareKey, Hostname, dbusername, dbtype, licenseserver)
+        '        ILic.USRS(HardwareKey, Database, "ECOM", Hostname, Environment.UserName, Hostname, IPA, IPB, Environment.UserName)
+        '        ILic.ADDN(AddOnKey, AddOnName, AddOnDescription)
+        '        ILic.ASSG(AddOnKey, HardwareKey, Database, "ECOM", Hostname)
+        '        IsValid = "Inactiva"
+        'End Select
         'TextBox3.Text = IsValid
         Return IsValid
     End Function
